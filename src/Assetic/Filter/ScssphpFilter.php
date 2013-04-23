@@ -58,11 +58,11 @@ class ScssphpFilter implements FilterInterface, HashableInterface
         if ($this->compass) {
             new \scss_compass($lc);
         }
-        if ($root && $path) {
-            $lc->addImportPath(dirname($root.'/'.$path));
-        }
         foreach ($this->importPaths as $path) {
             $lc->addImportPath($path);
+        }
+        if ($root && $path) {
+            $lc->addImportPath(dirname($root.'/'.$path));
         }
 
         return $this->compiled[$asset->getSourcePath()] = $lc->compile($asset->getContent());
